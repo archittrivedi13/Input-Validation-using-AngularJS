@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Submit Form</title>
+    <script src="http://code.angularjs.org/1.2.9/angular.min.js"></script>
+    <style>
+      .error {
+        color: red;
+      }
+    </style>
+    <script>
+      var app = angular.module('myApp', []);
+
+      app.controller('mainCtrl', function ($scope) {
+      
+        $scope.fullname = '';
+        $scope.email = '';
+        $scope.phone = '';
+        $scope.change = function() {
+          $scope.myVar = !$scope.myVar;
+        }
+        
+      });
+    </script>
+  </head>
+
+  <body ng-app="myApp">
+    <div ng-hide="myVar">
+	<ng-form name="myForm" ng-controller="mainCtrl">
+    <div>Full Name :</div>
+    <div>
+      <input type="text" name="fullname" placeholder="Archit Trivedi" ng-model="fullname" ng-pattern="word" required>
+        <span class="error" ng-show="myForm.fullname.$error.required">Required!</span>
+    </div>
+
+    <div>EmailId :</div>
+    <div>
+      <input type="email" placeholder="abc@xyz.com" name="email" ng-model="email" ng-minlength=3 ng-maxlength=40 required />
+      <span class="error" ng-show="myForm.email.$error.required">Required!</span>
+      <span class="error" ng-show="myForm.email.$error.minlength">Not less that 3 char</span>
+      <span class="error" ng-show="myForm.email.$error.email">Invalid Email!</span>
+    </div>
+
+    <div>Phone No. :</div>
+    <div>
+      <input type="text" placeholder="+1-4087580213" name="phone" ng-pattern="phoneNumbr" ng-model="phone" ng-minlength=12 ng-maxlength=13 required />
+      <span class="error" ng-show="myForm.phone.$error.required">Required!</span>
+      <span class="error" ng-show="myForm.phone.$error.minlength">Phone no not less that 10 char.</span>
+      <span class="error" ng-show="myForm.phone.$error.maxlength">Phone no not more than 11 char.</span>
+    </div>
+    
+
+    <div>Message :</div>
+    <div>
+      <textarea ng-model="txtarea" rows="4" cols="50" required>
+        
+      </textarea>
+      <span class="error" ng-show="myForm.textarea.$error.required">Required!</span>  
+    </div>
+    </div>
+    <div>
+      <button ng-click = "change();" >Submit</button>
+    </div>
+  </ng-form>
+</body>
+</html>
